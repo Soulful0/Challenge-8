@@ -1,4 +1,7 @@
 const inquirer = require(`inquirer`);
+const fs = require("fs");
+const path = require("path");
+const filePath = path.join(__dirname, "output", "logo.svg");
 const { Circle, Square, Triangle } = require(`./lib/shapes`);
 
 inquirer
@@ -6,10 +9,10 @@ inquirer
     {
       type: `input`,
       name: `characters`,
-      message: `What text should go instide of the svg? You can only use 3 characters.`,
+      message: `What text should go inside of the svg? You can only use 3 characters.`,
       validate: function (answer) {
         if (answer.length > 3) {
-          return false;
+          return "Please enter no more than 3 characters.";
         }
         return true;
       },
@@ -34,13 +37,13 @@ inquirer
   .then((answers) => {
     let shape;
     switch (answers.shape) {
-      case "Circle":
+      case "circle":
         shape = new Circle();
         break;
-      case "Triangle":
+      case "triangle":
         shape = new Triangle();
         break;
-      case "Square":
+      case "square":
         shape = new Square();
         break;
     }
@@ -48,9 +51,15 @@ inquirer
     if (shape) {
       shape.setColor(answers.shapeColor);
       let svg = shape.render();
-      // Add text to the SVG
       svg += `<text x="150" y="125" fill="${answers.textColor}" font-size="20" text-anchor="middle">${answers.characters}</text>`;
       svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">${svg}</svg>`;
-      console.log(svg);
+
+      fs.writeFile(filePath, svg, (err) => {
+        if (err) {
+          console.error("Error writing to file", err);
+        } else {
+          console.log("Successfully wrote to logo.svg");
+        }
+      });
     }
   });
