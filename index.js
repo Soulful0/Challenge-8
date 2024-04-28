@@ -58,7 +58,7 @@ inquirer
         if (err) {
           console.error("Error writing to file", err);
         } else {
-          console.log("Successfully wrote to logo.svg");
+          console.log("Successfully wrote to ./output/logo.svg");
         }
       });
     }
