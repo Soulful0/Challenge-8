@@ -1,1 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><polygon height='100' width='100' points="0,200 300,200 150,0" fill="blue" /><text x="150" y="125" fill="blue" font-size="20" text-anchor="middle">bla</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect width="300" height="300" x="10" fill="orange" /><text x="150" y="125" fill="white" font-size="20" text-anchor="middle">UTA</text></svg>
